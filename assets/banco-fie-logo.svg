@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="565" height="131" viewBox="0 0 565 131" role="img" aria-label="Banco FIE - recreación visual para prototipo académico">
+  <rect width="565" height="131" fill="#ffffff"/>
+  <g transform="translate(10 7)">
+    <path d="M18 26 C42 2 86 -2 111 14 C131 27 125 47 111 62 L77 96 L48 96 L78 66 C94 50 94 39 81 32 C66 24 43 28 28 42 Z" fill="#E3007B"/>
+    <path d="M105 72 C83 100 51 117 25 105 C3 95 8 73 24 57 L51 31 L79 31 L51 60 C35 77 37 89 51 93 C66 98 84 87 98 72 Z" fill="#2D4B9B"/>
+  </g>
+  <text x="145" y="82" font-family="Arial, Helvetica, sans-serif" font-size="61" font-style="italic" font-weight="500" fill="#E3007B">Banco</text>
+  <text x="351" y="82" font-family="Arial, Helvetica, sans-serif" font-size="61" font-style="italic" font-weight="500" fill="#2D4B9B">Fie</text>
+</svg>

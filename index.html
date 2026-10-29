@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Simuladores financieros demostrativos de plan de pagos y capacidad de pagos.">
+  <title>Simuladores financieros | Banco FIE · J.A.C.R</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="top-note">SIMULADOR DEMOSTRATIVO · By Jhonatan Choque</div>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Inicio">
+      <img class="brand-logo" src="assets/banco-fie-logo.svg" alt="Banco FIE"><span class="brand-context"><strong>Simuladores financieros</strong><small>Tarija, Bolivia · Simulador académico</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav id="mainNav" class="main-nav">
+      <button class="nav-btn active" data-view="home">Inicio</button>
+      <button class="nav-btn" data-view="plan">Plan de pagos</button>
+      <button class="nav-btn" data-view="capacity">Capacidad de pagos</button>
+      <button class="nav-btn" data-view="saved">Simulaciones guardadas</button>
+      <button class="nav-btn" data-view="settings">Parámetros</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="view-home" class="view active">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="hero-brand"><img src="assets/banco-fie-logo.svg" alt="Banco FIE"><span>SIMULADORES FINANCIEROS · TARIJA</span></div>
+          <span class="eyebrow">HERRAMIENTAS FINANCIERAS</span>
+          <h1>Decisiones financieras, con números claros.</h1>
+          <p>Calcula cronogramas de préstamos y analiza la capacidad mensual de pago. Utiliza cada simulador por separado o conecta los resultados entre ambos.</p>
+          <div class="hero-actions">
+            <button class="btn primary" data-go="plan">Simular plan de pagos <span>→</span></button>
+            <button class="btn secondary" data-go="capacity">Evaluar capacidad de pago</button>
+          </div>
+          <p class="micro-note">Los resultados son orientativos y no representan una oferta, aprobación ni evaluación crediticia oficial.</p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-top"><span>PORTAL FINANCIERO</span><span class="status-dot">● DEMO</span></div>
+          <div class="hero-visual-brand"><img src="assets/banco-fie-logo.svg" alt="Banco FIE"><span>¡eres tú! · Simulación orientativa</span></div>
+          <div class="hero-stat"><small>Moneda de simulación</small><strong>Bolivianos (Bs)</strong></div>
+          <div class="mini-bars"><i style="height:38%"></i><i style="height:54%"></i><i style="height:46%"></i><i style="height:72%"></i><i style="height:62%"></i><i style="height:90%"></i><i style="height:77%"></i><i style="height:100%"></i></div>
+          <div class="hero-card-bottom"><span>Planificación</span><span>Comparación</span><span>Reportes</span></div>
+        </div>
+      </div>
+      <div class="home-highlights"><div><span class="highlight-icon">↗</span><span><strong>Planifica</strong><small>Cuotas y amortización</small></span></div><div><span class="highlight-icon">◎</span><span><strong>Evalúa</strong><small>Ingresos y compromisos</small></span></div><div><span class="highlight-icon">▤</span><span><strong>Exporta</strong><small>Reportes para guardar</small></span></div></div>
+      <div class="section-heading"><div><span class="eyebrow">MÓDULOS</span><h2>¿Qué deseas calcular?</h2></div><p>Elige un módulo para comenzar. No necesitas usar el otro.</p></div>
+      <div class="module-grid">
+        <article class="module-card">
+          <div class="module-icon">▤</div><span class="card-kicker">MÓDULO 01</span>
+          <h3>Simulador de plan de pagos</h3>
+          <p>Genera cuotas, cronogramas de amortización y compara sistemas francés, alemán, americano y pago final tipo balloon.</p>
+          <ul><li>Intereses y costo total estimados</li><li>Pagos extraordinarios</li><li>Exportación de resultados</li></ul>
+          <button class="btn primary full" data-go="plan">Abrir plan de pagos →</button>
+        </article>
+        <article class="module-card">
+          <div class="module-icon">◔</div><span class="card-kicker">MÓDULO 02</span>
+          <h3>Simulador de capacidad de pagos</h3>
+          <p>Analiza el dinero disponible de una persona, familia, comerciante o empresa frente a una nueva cuota.</p>
+          <ul><li>Ingresos, gastos y deudas</li><li>Escenarios conservadores</li><li>Cuota máxima orientativa</li></ul>
+          <button class="btn primary full" data-go="capacity">Abrir capacidad de pagos →</button>
+        </article>
+      </div>
+      <div class="info-banner"><span class="info-icon">i</span><div><strong>Importante</strong><p>Los parámetros iniciales son de prueba. Antes de utilizarlos para representar productos concretos, verifica las tasas, comisiones, seguros y reglas en fuentes oficiales vigentes.</p></div></div>
+    </section>
+
+    <section id="view-plan" class="view">
+      <div class="page-heading"><div><span class="eyebrow">MÓDULO 01</span><h1>Simulador de plan de pagos</h1><p>Calcula la amortización del préstamo y compara escenarios.</p></div><button class="btn secondary" id="planReset">Restablecer</button></div>
+      <div class="workspace">
+        <form id="planForm" class="panel form-panel">
+          <div class="panel-title"><div><h2>Datos del préstamo</h2><p>Completa los campos para generar el cronograma.</p></div><span class="step-chip">01 / DATOS</span></div>
+          <label>Nombre de referencia (opcional)<input id="planLabel" type="text" maxlength="80" placeholder="Ej. Crédito para negocio"></label>
+          <div class="form-grid">
+            <label>Monto del préstamo (Bs)<input id="principal" type="number" min="1" step="0.01" value="30000" required></label>
+            <label>Tasa nominal anual (%)<input id="annualRate" type="number" min="0" max="200" step="0.01" value="18" required></label>
+            <label>Plazo (meses)<input id="months" type="number" min="1" max="600" step="1" value="24" required></label>
+            <label>Frecuencia de pago<select id="frequency"><option value="1">Mensual</option><option value="3">Trimestral</option><option value="6">Semestral</option><option value="12">Anual</option></select></label>
+            <label>Fecha de desembolso<input id="startDate" type="date" required></label>
+            <label>Primer vencimiento<input id="firstDueDate" type="date" required></label>
+          </div>
+          <label>Sistema de amortización<select id="method"><option value="french">Francés · cuota periódica constante</option><option value="german">Alemán · capital constante</option><option value="american">Americano · capital al vencimiento</option><option value="balloon">Balloon · pago final extraordinario</option></select></label>
+          <div id="balloonField" class="hidden"><label>Capital a pagar al vencimiento (%)<input id="balloonPercent" type="number" min="1" max="90" step="1" value="30"></label><p class="field-help">Porcentaje del capital original que se reserva para el pago final. El resto se amortiza durante el plazo.</p></div>
+          <div class="form-grid">
+            <label>Cargo fijo por cuota (Bs)<input id="feePerPayment" type="number" min="0" step="0.01" value="0"></label>
+            <label>Otros costos iniciales (Bs)<input id="upfrontCosts" type="number" min="0" step="0.01" value="0"></label>
+          </div>
+          <div class="subsection-heading"><h3>Tasa TRe y seguros (si corresponden)</h3><p>Deja en 0 los conceptos que no apliquen. Completa las bases y tasas con datos del contrato, tarifario o póliza.</p></div>
+          <div class="form-grid">
+            <label>TRe adicional anual (puntos porcentuales)<input id="treRate" type="number" min="0" max="200" step="0.01" value="0"><small class="input-help">Se suma a la tasa nominal anual ingresada arriba. Usa 0 si el producto no aplica TRe o si la tasa ya la incluye.</small></label>
+            <label>Seguro de desgravamen (tasa por mil mensual)<input id="desgravamenRate" type="number" min="0" max="100" step="0.001" value="0"><small class="input-help">Ejemplo: 1‰ equivale a Bs 1 por cada Bs 1.000 de base asegurada al mes.</small></label>
+            <label>Base de cálculo de desgravamen<select id="desgravamenBase"><option value="balance">Saldo pendiente al inicio de cada período</option><option value="principal">Monto original del préstamo</option></select></label>
+            <label>Seguro de cesantía (tasa por mil mensual)<input id="cesantiaRate" type="number" min="0" max="100" step="0.001" value="0"><small class="input-help">Ingresa la tasa de la póliza; no se presume que aplique a todos los créditos.</small></label>
+            <label>Base de cálculo de cesantía<select id="cesantiaBase"><option value="balance">Saldo pendiente al inicio de cada período</option><option value="principal">Monto original del préstamo</option></select></label>
+            <label>Otros seguros por cuota (Bs)<input id="otherInsurance" type="number" min="0" step="0.01" value="0"><small class="input-help">Importe fijo total por cada vencimiento, si existe.</small></label>
+          </div>
+          <div class="field-help">Los seguros se calculan como tasa por mil mensual × base asegurada × meses de la frecuencia de pago. Si la póliza usa una fórmula distinta (prima fija, tasa anual o días exactos), el cálculo debe adaptarse a esa condición antes de usarlo como cronograma contractual.</div>
+          <details class="advanced">
+            <summary>Opciones avanzadas: abono extraordinario</summary>
+            <div class="form-grid">
+              <label>Abono a capital (Bs)<input id="extraAmount" type="number" min="0" step="0.01" value="0"></label>
+              <label>N.º de cuota del abono<input id="extraAt" type="number" min="1" max="600" step="1" value="6"></label>
+            </div>
+            <label>Tratamiento del abono<select id="extraMode"><option value="reducePayment">Reducir cuotas posteriores</option><option value="reduceTerm">Mantener cuota base (puede acortar plazo)</option></select></label>
+            <p class="field-help">Modelo simplificado: el abono se aplica al capital después de la cuota indicada. El resultado no representa condiciones contractuales de un producto real.</p>
+          </details>
+          <div class="form-actions"><button class="btn primary" type="submit">Calcular plan de pagos <span>→</span></button><button class="btn secondary" type="button" id="comparePlan">Guardar para comparar</button></div>
+          <p class="form-error" id="planError" role="alert"></p>
+        </form>
+        <aside class="panel side-panel">
+          <div class="panel-title"><div><h2>Cómo funciona</h2><p>Conceptos clave</p></div></div>
+          <div class="method-note"><strong>Francés</strong><p>La cuota financiera es constante con tasa fija; la proporción de intereses disminuye con el tiempo.</p></div>
+          <div class="method-note"><strong>Alemán</strong><p>La amortización de capital es constante; la cuota total suele disminuir.</p></div>
+          <div class="method-note"><strong>Americano</strong><p>Se pagan intereses en cada período y el principal se devuelve al vencimiento.</p></div>
+          <div class="method-note"><strong>Balloon</strong><p>Parte del capital queda pendiente para un pago extraordinario final.</p></div>
+          <div class="info-banner compact"><span class="info-icon">i</span><p>Se usa una tasa periódica derivada de la tasa nominal anual y la frecuencia elegida. Los contratos reales pueden utilizar convenciones distintas.</p></div>
+        </aside>
+      </div>
+      <div id="planResults" class="results-area hidden">
+        <div class="print-brand-header"><img src="assets/banco-fie-logo.svg" alt="Banco FIE"><div><strong>Reporte de simulación financiera</strong><span>Tarija, Bolivia · Prototipo académico independiente</span></div></div>
+        <div class="results-heading"><div><span class="eyebrow">RESULTADO DE SIMULACIÓN</span><h2 id="planResultTitle">Resumen del plan</h2><p id="planResultSub"></p></div><div class="result-actions"><button class="btn secondary" id="sendToCapacity">Usar cuota en capacidad de pagos ↗</button><button class="btn secondary" id="downloadPlanCsv">Descargar Excel</button><button class="btn primary" id="printPlan">Descargar / guardar PDF</button></div></div>
+        <div id="planMetrics" class="metric-grid"></div>
+        <div class="chart-grid">
+          <div class="panel chart-panel"><div class="panel-title"><div><h3>Distribución del pago</h3><p>Capital e intereses estimados</p></div></div><canvas id="planDonut" aria-label="Gráfico de capital e intereses"></canvas></div>
+          <div class="panel chart-panel"><div class="panel-title"><div><h3>Evolución del saldo</h3><p>Saldo pendiente después de cada pago</p></div></div><canvas id="balanceChart" aria-label="Gráfico de saldo pendiente"></canvas></div>
+        </div>
+        <div class="panel table-panel"><div class="panel-title"><div><h3>Cronograma de pagos</h3><p>Los importes pueden variar por redondeos y convenciones contractuales.</p></div><span id="scheduleCount" class="step-chip"></span></div><div class="table-wrap"><table id="scheduleTable"><thead><tr><th>N.º</th><th>Vencimiento</th><th>Saldo inicial</th><th>Capital</th><th>Interés</th><th>Cargo</th><th>Desgravamen</th><th>Cesantía</th><th>Otros seguros</th><th>Cuota total</th><th>Abono extra</th><th>Saldo final</th></tr></thead><tbody></tbody></table></div></div>
+      </div>
+    </section>
+
+    <section id="view-capacity" class="view">
+      <div class="page-heading"><div><span class="eyebrow">MÓDULO 02</span><h1>Simulador de capacidad de pagos</h1><p>Funciona por sí solo o con la cuota calculada en el plan de pagos.</p></div><button class="btn secondary" id="capacityReset">Restablecer</button></div>
+      <div class="workspace">
+        <form id="capacityForm" class="panel form-panel">
+          <div class="panel-title"><div><h2>Perfil financiero</h2><p>Introduce importes mensuales en bolivianos.</p></div><span class="step-chip">02 / ANÁLISIS</span></div>
+          <label>Perfil del solicitante<select id="profile"><option value="person">Persona o familia</option><option value="business">Comerciante o empresa</option></select></label>
+          <label>Nombre de referencia (opcional)<input id="capacityLabel" maxlength="80" placeholder="Ej. Evaluación de negocio"></label>
+          <div class="form-grid">
+            <label id="incomeLabel">Ingresos mensuales netos (Bs)<input id="income" type="number" min="0" step="0.01" value="5000" required></label>
+            <label id="expenseLabel">Gastos mensuales del hogar (Bs)<input id="expenses" type="number" min="0" step="0.01" value="2500" required></label>
+            <label>Cuotas de otras deudas (Bs/mes)<input id="existingDebts" type="number" min="0" step="0.01" value="500" required></label>
+            <label>Nueva cuota propuesta (Bs/mes)<input id="proposedPayment" type="number" min="0" step="0.01" value="800" required></label>
+          </div>
+          <details class="advanced" open>
+            <summary>Escenario conservador y criterio orientativo</summary>
+            <div class="form-grid">
+              <label>Reducción de ingresos (%)<input id="incomeDrop" type="number" min="0" max="100" step="1" value="10"></label>
+              <label>Aumento de gastos (%)<input id="expenseRise" type="number" min="0" max="300" step="1" value="10"></label>
+              <label>Reserva de seguridad (%)<input id="safetyMargin" type="number" min="0" max="90" step="1" value="10"></label>
+              <label>Límite orientativo cuota/ingresos (%)<input id="paymentLimit" type="number" min="1" max="100" step="1" value="30"></label>
+            </div>
+            <p class="field-help">Estos límites son configurables y no se atribuyen a políticas oficiales de Banco FIE.</p>
+          </details>
+          <div class="form-actions"><button class="btn primary" type="submit">Evaluar capacidad de pago <span>→</span></button><button class="btn secondary" type="button" id="capacityFromPlan">Traer cuota del plan de pagos</button></div>
+          <p class="form-error" id="capacityError" role="alert"></p>
+        </form>
+        <aside class="panel side-panel">
+          <div class="panel-title"><div><h2>Indicadores</h2><p>Qué analiza el módulo</p></div></div>
+          <div class="method-note"><strong>Excedente mensual</strong><p>Ingresos menos gastos y deudas existentes.</p></div>
+          <div class="method-note"><strong>Relación cuota / ingresos</strong><p>La nueva cuota como porcentaje de los ingresos mensuales.</p></div>
+          <div class="method-note"><strong>Margen después de la cuota</strong><p>Dinero que quedaría tras los gastos y todas las cuotas incluidas.</p></div>
+          <div class="method-note"><strong>Escenario conservador</strong><p>Estima el resultado si bajan los ingresos y suben los gastos.</p></div>
+          <div class="info-banner compact"><span class="info-icon">i</span><p>No es una decisión de crédito. La evaluación real requiere comprobación de ingresos, políticas y otros factores.</p></div>
+        </aside>
+      </div>
+      <div id="capacityResults" class="results-area hidden">
+        <div class="print-brand-header"><img src="assets/banco-fie-logo.svg" alt="Banco FIE"><div><strong>Reporte de capacidad de pagos</strong><span>Tarija, Bolivia · Prototipo académico independiente</span></div></div>
+        <div class="results-heading"><div><span class="eyebrow">RESULTADO DE SIMULACIÓN</span><h2 id="capacityResultTitle">Análisis de capacidad</h2><p id="capacityResultSub"></p></div><div class="result-actions"><button class="btn secondary" id="capacityToPlan">Usar cuota máxima en plan de pagos ↗</button><button class="btn secondary" id="downloadCapacityExcel">Descargar Excel</button><button class="btn primary" id="printCapacity">Descargar / guardar PDF</button></div></div>
+        <div id="capacityStatus" class="status-banner"></div>
+        <div id="capacityMetrics" class="metric-grid"></div>
+        <div class="chart-grid">
+          <div class="panel chart-panel"><div class="panel-title"><div><h3>Distribución mensual</h3><p>Ingresos y compromisos declarados</p></div></div><canvas id="capacityChart" aria-label="Gráfico de ingresos y gastos"></canvas></div>
+          <div class="panel chart-panel"><div class="panel-title"><div><h3>Escenario normal y conservador</h3><p>Margen estimado tras compromisos</p></div></div><canvas id="scenarioChart" aria-label="Comparación de escenarios"></canvas></div>
+        </div>
+        <div class="panel table-panel"><div class="panel-title"><div><h3>Detalle del análisis</h3><p>Fórmulas transparentes y supuestos utilizados.</p></div></div><div class="table-wrap"><table id="capacityTable"><thead><tr><th>Indicador</th><th>Resultado</th><th>Interpretación</th></tr></thead><tbody></tbody></table></div></div>
+      </div>
+    </section>
+
+    <section id="view-saved" class="view">
+      <div class="page-heading"><div><span class="eyebrow">HISTORIAL LOCAL</span><h1>Simulaciones guardadas</h1><p>Las simulaciones se guardan solo en este navegador.</p></div><button class="btn danger-outline" id="clearSaved">Borrar historial</button></div>
+      <div class="info-banner"><span class="info-icon">i</span><div><strong>Privacidad</strong><p>Este prototipo no envía los datos a un servidor. El historial se almacena en el almacenamiento local del navegador del dispositivo.</p></div></div>
+      <div id="savedList" class="saved-list"></div>
+    </section>
+
+    <section id="view-settings" class="view">
+      <div class="page-heading"><div><span class="eyebrow">CONFIGURACIÓN</span><h1>Parámetros de simulación</h1><p>Administra los valores de demostración usados en los formularios.</p></div></div>
+      <div class="settings-grid">
+        <form id="settingsForm" class="panel form-panel">
+          <div class="panel-title"><div><h2>Valores predeterminados</h2><p>No son tasas oficiales ni una oferta bancaria.</p></div></div>
+          <label>Tasa nominal anual predeterminada (%)<input id="defaultRate" type="number" min="0" max="200" step="0.01" value="18"></label>
+          <label>Límite orientativo de cuota/ingresos (%)<input id="defaultLimit" type="number" min="1" max="100" step="1" value="30"></label>
+          <label>Nombre del conjunto de parámetros<input id="parameterName" maxlength="100" value="Parámetros demostrativos"></label>
+          <label>Fuente / nota de procedencia<textarea id="parameterSource" rows="3" placeholder="Ej. Valor de prueba para demostración académica"></textarea></label>
+          <div class="form-actions"><button class="btn primary" type="submit">Guardar parámetros</button><button class="btn secondary" type="button" id="resetSettings">Restaurar valores iniciales</button></div>
+          <p class="form-error" id="settingsMessage" role="status"></p>
+        </form>
+        <div class="panel side-panel"><div class="panel-title"><div><h2>Buenas prácticas</h2><p>Antes de usar datos reales</p></div></div><ul class="check-list"><li>Verifica tasas y condiciones en fuentes oficiales vigentes.</li><li>Registra la fecha de vigencia de cada parámetro.</li><li>No atribuyas límites de evaluación al banco sin documentación.</li><li>No uses datos personales reales en este prototipo.</li><li>Revisa las fórmulas con un especialista financiero.</li></ul></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="footer-brand"><span class="fie-symbol small" aria-hidden="true"><i></i><b></b></span><span><strong><em>Banco</em><b>Fie</b> · Simuladores</strong><small>Prototipo académico independiente</small></span></div><p>Prototipo académico independiente, con identidad visual inspirada en los colores de Banco FIE. No es un sistema oficial ni está afiliado al banco.</p><p>© <span id="year"></span> · Tarija, Bolivia</p></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>
